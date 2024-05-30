@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Furniro Shop</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">Furniro</div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Shop</a></li>
+                <li><a href="blog.html">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="icons">
+            <a href="#">👤</a>
+            <a href="#">🛒</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>Shop</h1>
+        <p>Home > Shop</p>
+    </section>
+
+    <section class="shop-controls">
+        <div class="filter">
+            <a href="#">Filter</a>
+        </div>
+        <div class="showing-results">
+            <p>Showing 1-16 of 32 results</p>
+        </div>
+        <div class="show-sort">
+            <label for="show">Show</label>
+            <select id="show">
+                <option value="16">16</option>
+                <option value="32">32</option>
+                <option value="64">64</option>
+            </select>
+            <label for="sort">Sort by</label>
+            <select id="sort">
+                <option value="default">Default</option>
+                <option value="price-low-high">Price: Low to High</option>
+                <option value="price-high-low">Price: High to Low</option>
+            </select>
+        </div>
+    </section>
+
+    <section class="products">
+        <div class="product-list">
+            <!-- Repeat this block for each product -->
+            <div class="product">
+                <img src="product1.jpg" alt="Product Image">
+                <h3>Syltherine</h3>
+                <p>Stylish cafe chair</p>
+                <p class="price">Rp 2.500.000 <span class="old-price">Rp 3.500.000</span></p>
+                <a href="#" class="btn">Add to cart</a>
+            </div>
+            <!-- Repeat ends here -->
+        </div>
+    </section>
+
+    <section class="pagination">
+        <a href="#" class="page-link active">1</a>
+        <a href="#" class="page-link">2</a>
+        <a href="#" class="page-link">3</a>
+        <a href="#" class="page-link">Next</a>
+    </section>
+
+    <section class="features">
+        <div class="feature">
+            <img src="quality-icon.png" alt="High Quality">
+            <p>High Quality</p>
+            <span>crafted from top materials</span>
+        </div>
+        <div class="feature">
+            <img src="warranty-icon.png" alt="Warranty Protection">
+            <p>Warranty Protection</p>
+            <span>Over 2 years</span>
+        </div>
+        <div class="feature">
+            <img src="shipping-icon.png" alt="Free Shipping">
+            <p>Free Shipping</p>
+            <span>Order over 150 $</span>
+        </div>
+        <div class="feature">
+            <img src="support-icon.png" alt="24 / 7 Support">
+            <p>24 / 7 Support</p>
+            <span>Dedicated support</span>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="address">
+                <h3>Furniro.</h3>
+                <p>400 University Drive Suite 200 Coral Gables, FL 33134 USA</p>
+            </div>
+            <div class="links">
+                <h3>Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Shop</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="help">
+                <h3>Help</h3>
+                <ul>
+                    <li><a href="#">Payment Options</a></li>
+                    <li><a href="#">Returns</a></li>
+                    <li><a href="#">Privacy Policies</a></li>
+                </ul>
+            </div>
+            <div class="newsletter">
+                <h3>Newsletter</h3>
+                <input type="email" placeholder="Enter Your Email Address">
+                <button>Subscribe</button>
+            </div>
+        </div>
+        <p>2023 Furniro. All rights reserved</p>
+    </footer>
+</body>
+</html>

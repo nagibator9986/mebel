@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Detail</title>
+    <link rel="stylesheet" href="single.css">
+</head>
+<body>
+    <header>
+        <div class="logo">Furniro</div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Shop</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="icons">
+            <a href="#">👤</a>
+            <a href="#" id="cart-icon">🛒</a>
+        </div>
+    </header>
+
+    <section class="breadcrumb">
+        <p>Home > Shop > Asgaard sofa</p>
+    </section>
+
+    <section class="product-detail">
+        <div class="product-images">
+            <div class="thumbnail-images">
+                <div class="thumbnail"><!-- Thumbnail Image Placeholder --></div>
+                <div class="thumbnail"><!-- Thumbnail Image Placeholder --></div>
+                <div class="thumbnail"><!-- Thumbnail Image Placeholder --></div>
+                <div class="thumbnail"><!-- Thumbnail Image Placeholder --></div>
+            </div>
+            <div class="main-image">
+                <!-- Main Image Placeholder -->
+            </div>
+        </div>
+        <div class="product-info">
+            <h1>Asgaard sofa</h1>
+            <p class="price">Rs. 250,000.00</p>
+            <div class="rating">
+                <span>★★★★★</span>
+                <span>5 Customer Review</span>
+            </div>
+            <p class="description">Setting the bar as one of the loudest speakers in its class...</p>
+            <div class="options">
+                <div class="size">
+                    <label>Size</label>
+                    <div class="size-options">
+                        <button>L</button>
+                        <button>XL</button>
+                        <button>XS</button>
+                    </div>
+                </div>
+                <div class="color">
+                    <label>Color</label>
+                    <div class="color-options">
+                        <button class="color-black"></button>
+                        <button class="color-purple"></button>
+                        <button class="color-gold"></button>
+                    </div>
+                </div>
+            </div>
+            <div class="quantity">
+                <label>Quantity</label>
+                <div class="quantity-controls">
+                    <button onclick="adjustQuantity(-1)">-</button>
+                    <input type="number" value="1" min="1">
+                    <button onclick="adjustQuantity(1)">+</button>
+                </div>
+            </div>
+            <div class="buttons">
+                <button class="btn">Add To Cart</button>
+                <button class="btn secondary">Compare</button>
+            </div>
+            <div class="meta-info">
+                <p><strong>SKU</strong>: SS001</p>
+                <p><strong>Category</strong>: Sofas</p>
+                <p><strong>Tags</strong>: Sofa, Chair, Home, Shop</p>
+                <p><strong>Share</strong>:
+                    <a href="#">Facebook</a>
+                    <a href="#">LinkedIn</a>
+                    <a href="#">Twitter</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="tabs">
+        <button class="tab-button active" onclick="openTab(event, 'description')">Description</button>
+        <button class="tab-button" onclick="openTab(event, 'additional-info')">Additional Information</button>
+        <button class="tab-button" onclick="openTab(event, 'reviews')">Reviews [5]</button>
+    </section>
+
+    <section id="description" class="tab-content active">
+        <p>Embodying the raw, wayward spirit of rock 'n' roll...</p>
+        <p>Weighing in under 7 pounds...</p>
+    </section>
+
+    <section id="additional-info" class="tab-content">
+        <p>Additional information about the product...</p>
+    </section>
+
+    <section id="reviews" class="tab-content">
+        <p>Customer reviews and ratings...</p>
+    </section>
+
+    <section class="related-products">
+        <h2>Related Products</h2>
+        <div class="product-list">
+            <!-- Repeat this block for each related product -->
+            <div class="product">
+                <div class="product-image"><!-- Place for product image --></div>
+                <h3>Syltherine</h3>
+                <p>Stylish cafe chair</p>
+                <p class="price">Rp 2.500.000 <span class="old-price">Rp 3.500.000</span></p>
+                <a href="#" class="btn">Add to cart</a>
+            </div>
+            <!-- Repeat ends here -->
+        </div>
+        <a href="#" class="btn show-more">Show More</a>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="address">
+                <h3>Furniro.</h3>
+                <p>400 University Drive Suite 200 Coral Gables, FL 33134 USA</p>
+            </div>
+            <div class="links">
+                <h3>Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Shop</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="help">
+                <h3>Help</h3>
+                <ul>
+                    <li><a href="#">Payment Options</a></li>
+                    <li><a href="#">Returns</a></li>
+                    <li><a href="#">Privacy Policies</a></li>
+                </ul>
+            </div>
+            <div class="newsletter">
+                <h3>Newsletter</h3>
+                <input type="email" placeholder="Enter Your Email Address">
+                <button>Subscribe</button>
+            </div>
+        </div>
+        <p>2023 Furniro. All rights reserved</p>
+    </footer>
+
+    <div id="cart-modal" class="cart-modal">
+        <div class="cart-modal-content">
+            <span class="close" id="close-cart">&times;</span>
+            <h2>Shopping Cart</h2>
+            <div class="cart-items">
+                <!-- Repeat this block for each cart item -->
+                <div class="cart-item">
+                    <div class="cart-item-image"><!-- Place for cart item image --></div>
+                    <div class="cart-item-details">
+                        <h3>Asgaard sofa</h3>
+                        <p>Rs. 250,000.00</p>
+                        <p>Quantity: 1</p>
+                    </div>
+                    <div class="cart-item-remove">
+                        <button>&times;</button>
+                    </div>
+                </div>
+                <!-- Repeat ends here -->
+            </div>
+            <div class="cart-total">
+                <p>Subtotal: <span>Rs. 520,000.00</span></p>
+            </div>
+            <div class="cart-actions">
+                <button class="btn">Cart</button>
+                <button class="btn">Checkout</button>
+                <button class="btn secondary">Comparison</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="single.js"></script>
+</body>
+</html>
