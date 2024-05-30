@@ -1,10 +1,25 @@
 <?php
 include 'database.php';
+session_start();
 
-// Fetch products
-$stmt = $pdo->prepare("SELECT products.*, categories.name AS category_name FROM products LEFT JOIN categories ON products.category_id = categories.id");
-$stmt->execute();
-$products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+if (isset($_GET['id'])) {
+    $order_id = $_GET['id'];
+    $stmt = $pdo->prepare("SELECT * FROM orders WHERE id = ? AND user_id = ?");
+    $stmt->execute([$order_id, $_SESSION['user_id']]);
+    $order = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($order) {
+        $stmt = $pdo->prepare("SELECT order_items.*, products.name FROM order_items LEFT JOIN products ON order_items.product_id = products.id WHERE order_id = ?");
+        $stmt->execute([$order_id]);
+        $order_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } else {
+        header("Location: order_history.php");
+        exit;
+    }
+} else {
+    header("Location: order_history.php");
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +27,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop</title>
+    <title>Order Details</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -33,29 +48,37 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </header>
 
     <section class="breadcrumb">
-        <p>Home > Shop</p>
+        <p>Home > Order History > Order Details</p>
     </section>
 
-    <section class="shop-header">
-        <h1>Shop</h1>
+    <section class="order-details-header">
+        <h1>Order Details</h1>
     </section>
 
-    <main class="shop-content">
-        <section class="products">
-            <?php foreach ($products as $product): ?>
-            <div class="product">
-                <img src="<?php echo $product['image']; ?>" alt="<?php echo $product['name']; ?>">
-                <h2><?php echo $product['name']; ?></h2>
-                <p><?php echo substr($product['description'], 0, 100); ?>...</p>
-                <p>Price: $<?php echo $product['price']; ?></p>
-                <form action="add_to_cart.php" method="post">
-                    <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
-                    <button type="submit">Add to Cart</button>
-                </form>
-                <a href="product.php?id=<?php echo $product['id']; ?>" class="view-details">View Details</a>
-            </div>
-            <?php endforeach; ?>
-        </section>
+    <main class="order-details-content">
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($order_items as $item): ?>
+                <tr>
+                    <td><?php echo $item['name']; ?></td>
+                    <td><?php echo $item['quantity']; ?></td>
+                    <td>$<?php echo $item['price']; ?></td>
+                    <td>$<?php echo $item['quantity'] * $item['price']; ?></td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+        <p>Order Total: $<?php echo $order['total']; ?></p>
+        <p>Order Date: <?php echo $order['created_at']; ?></p>
+        <p>Order Status: <?php echo $order['status']; ?></p>
     </main>
 
     <footer>

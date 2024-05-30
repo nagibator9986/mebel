@@ -19,31 +19,17 @@ foreach ($products as $product) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = $_POST['name'];
-    $surname = $_POST['surname'];
-    $address = $_POST['address'];
-    $phone = $_POST['phone'];
-
-    if ($name && $surname && $address && $phone) {
-        try {
-            $stmt = $pdo->prepare("INSERT INTO orders (user_id, total) VALUES (?, ?)");
-            $stmt->execute([$_SESSION['user_id'], $total]);
-            $order_id = $pdo->lastInsertId();
-
-            foreach ($products as $product) {
-                $stmt = $pdo->prepare("INSERT INTO order_items (order_id, product_id, quantity, price) VALUES (?, ?, ?, ?)");
-                $stmt->execute([$order_id, $product['id'], $cart[$product['id']], $product['price']]);
-            }
-
-            unset($_SESSION['cart']);
-            header("Location: order_confirmation.php");
-            exit;
-        } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
+    // Update quantities
+    foreach ($_POST['quantity'] as $product_id => $quantity) {
+        if ($quantity == 0) {
+            unset($_SESSION['cart'][$product_id]);
+        } else {
+            $_SESSION['cart'][$product_id] = $quantity;
         }
-    } else {
-        echo "All fields are required.";
     }
+
+    header("Location: cart.php");
+    exit;
 }
 ?>
 
@@ -52,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout</title>
+    <title>Cart</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -73,30 +59,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </header>
 
     <section class="breadcrumb">
-        <p>Home > Checkout</p>
+        <p>Home > Cart</p>
     </section>
 
-    <section class="checkout-header">
-        <h1>Checkout</h1>
+    <section class="cart-header">
+        <h1>Cart</h1>
     </section>
 
-    <main class="checkout-content">
-        <form method="post" action="checkout.php">
-            <label for="name">First Name:</label>
-            <input type="text" id="name" name="name" required>
-            <br>
-            <label for="surname">Last Name:</label>
-            <input type="text" id="surname" name="surname" required>
-            <br>
-            <label for="address">Address:</label>
-            <input type="text" id="address" name="address" required>
-            <br>
-            <label for="phone">Phone:</label>
-            <input type="text" id="phone" name="phone" required>
-            <br>
+    <main class="cart-content">
+        <form method="post" action="cart.php">
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($products as $product): ?>
+                    <tr>
+                        <td><?php echo $product['name']; ?></td>
+                        <td>$<?php echo $product['price']; ?></td>
+                        <td>
+                            <input type="number" name="quantity[<?php echo $product['id']; ?>]" value="<?php echo $cart[$product['id']]; ?>" min="0">
+                        </td>
+                        <td>$<?php echo $product['price'] * $cart[$product['id']]; ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
             <p>Total: $<?php echo $total; ?></p>
-            <button type="submit">Place Order</button>
+            <button type="submit">Update Cart</button>
         </form>
+        <a href="checkout.php">Proceed to Checkout</a>
     </main>
 
     <footer>

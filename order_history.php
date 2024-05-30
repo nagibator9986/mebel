@@ -1,10 +1,10 @@
 <?php
 include 'database.php';
+session_start();
 
-// Fetch products
-$stmt = $pdo->prepare("SELECT products.*, categories.name AS category_name FROM products LEFT JOIN categories ON products.category_id = categories.id");
-$stmt->execute();
-$products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$stmt = $pdo->prepare("SELECT * FROM orders WHERE user_id = ?");
+$stmt->execute([$_SESSION['user_id']]);
+$orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +12,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop</title>
+    <title>Order History</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -33,29 +33,38 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </header>
 
     <section class="breadcrumb">
-        <p>Home > Shop</p>
+        <p>Home > Order History</p>
     </section>
 
-    <section class="shop-header">
-        <h1>Shop</h1>
+    <section class="order-history-header">
+        <h1>Order History</h1>
     </section>
 
-    <main class="shop-content">
-        <section class="products">
-            <?php foreach ($products as $product): ?>
-            <div class="product">
-                <img src="<?php echo $product['image']; ?>" alt="<?php echo $product['name']; ?>">
-                <h2><?php echo $product['name']; ?></h2>
-                <p><?php echo substr($product['description'], 0, 100); ?>...</p>
-                <p>Price: $<?php echo $product['price']; ?></p>
-                <form action="add_to_cart.php" method="post">
-                    <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
-                    <button type="submit">Add to Cart</button>
-                </form>
-                <a href="product.php?id=<?php echo $product['id']; ?>" class="view-details">View Details</a>
-            </div>
-            <?php endforeach; ?>
-        </section>
+    <main class="order-history-content">
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Date</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($orders as $order): ?>
+                <tr>
+                    <td><?php echo $order['id']; ?></td>
+                    <td><?php echo $order['created_at']; ?></td>
+                    <td>$<?php echo $order['total']; ?></td>
+                    <td><?php echo $order['status']; ?></td>
+                    <td>
+                        <a href="order_details.php?id=<?php echo $order['id']; ?>">View Details</a>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
     </main>
 
     <footer>
