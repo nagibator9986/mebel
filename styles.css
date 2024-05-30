@@ -1,0 +1,193 @@
+/* Reset and Base Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    margin-right: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+.icons a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #333;
+}
+
+.breadcrumb {
+    background-color: #f8f8f8;
+    padding: 10px 20px;
+}
+
+.breadcrumb p {
+    margin: 0;
+}
+
+.shop-header {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.shop-header h1 {
+    font-size: 36px;
+    margin: 0;
+}
+
+.shop-content {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.products {
+    flex: 3;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.product {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    margin: 10px;
+    padding: 20px;
+    box-sizing: border-box;
+    width: calc(33.333% - 40px);
+}
+
+.product img {
+    width: 100%;
+    height: auto;
+}
+
+.product h2 {
+    font-size: 24px;
+    margin: 10px 0;
+}
+
+.product p {
+    font-size: 16px;
+    color: #666;
+}
+
+.view-details {
+    color: #ff9800;
+    font-weight: bold;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+    background-color: #fff;
+    border-top: 1px solid #ddd;
+}
+
+.footer-content div {
+    flex: 1;
+    margin: 0 10px;
+}
+
+.footer-content h3 {
+    margin-top: 0;
+}
+
+.footer-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-content ul li {
+    margin-bottom: 10px;
+}
+
+.footer-content ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+.newsletter input {
+    padding: 10px;
+    width: calc(100% - 120px);
+    margin-right: 10px;
+    box-sizing: border-box;
+}
+
+.newsletter button {
+    padding: 10px;
+    background-color: #ff9800;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+footer p {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .shop-content {
+        flex-direction: column;
+    }
+
+    .products {
+        justify-content: center;
+    }
+
+    .product {
+        width: calc(100% - 40px);
+    }
+
+    .footer-content {
+        flex-direction: column;
+    }
+
+    .footer-content div {
+        margin-bottom: 20px;
+    }
+}
